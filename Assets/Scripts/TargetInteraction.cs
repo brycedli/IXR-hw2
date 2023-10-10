@@ -27,12 +27,13 @@ public class TargetInteraction : MonoBehaviour
     public GameObject targetGameObject;
     public GameObject sourceGameObject;
     public GameObject wall;
-    
-    private int trialAmount = 1;
+    public GameObject player;
+
+    private int trialAmount = 10;
     public int trialCount = 0;
     private double[] resultsTime;
     private int[] resultsAccuracy;
-    private double penalty = 50;
+    private double penalty = 3;
     private DateTime timeStart;
     public enum ManipulationType
     {
@@ -53,6 +54,7 @@ public class TargetInteraction : MonoBehaviour
 
     void Start()
     {
+        Debug.Assert(player);
         debugMesh = debugLog.GetComponent<TextMeshProUGUI>();
         textMeshResult = textResult.GetComponent<TextMeshProUGUI>();
     }
@@ -169,6 +171,9 @@ public class TargetInteraction : MonoBehaviour
         targetGameObject.transform.position = GetRandomPosition();
         targetGameObject.transform.localScale = new Vector3(GetRandomScale(), GetRandomScale(), GetRandomScale());
         targetGameObject.transform.rotation = Quaternion.Euler(new Vector3(GetRandomRotation(), GetRandomRotation(), GetRandomRotation()));
+        Vector3 cameraPosition = targetGameObject.transform.position - Camera.main.transform.forward * 0.5f;
+        cameraPosition.y = targetGameObject.transform.position.y;
+        player.transform.position = cameraPosition;
     }
 
     private void InitiateSource()
@@ -189,7 +194,9 @@ public class TargetInteraction : MonoBehaviour
         }
         else
         {
-            targetGameObject.GetComponent<Renderer>().material.color = Color.red;
+            Color temp = Color.red;
+            temp.a = 0.5f;
+            targetGameObject.GetComponent<Renderer>().material.color = temp;
         }    
     }
 
@@ -209,10 +216,10 @@ public class TargetInteraction : MonoBehaviour
     {
         InitiateSource();
         InitiateTarget();
+
+
         timeStart = DateTime.Now;
         wall.SetActive(false);
-        resultsTime = new double[trialAmount];
-        resultsAccuracy = new int[trialAmount];
         textMeshResult.text = "";
         textResult.SetActive(false);
         debugMesh.text = "";
@@ -222,11 +229,13 @@ public class TargetInteraction : MonoBehaviour
     public void Reset()
     {
         trialCount = 0;
+        resultsTime = new double[trialAmount];
+        resultsAccuracy = new int[trialAmount];
         StartTrial();
     }
     public void ConfirmSelection()
     {
-        if (trialCount > trialAmount)
+        if (trialCount >= trialAmount)
         {
             Reset();
             return;
@@ -239,7 +248,7 @@ public class TargetInteraction : MonoBehaviour
             resultsAccuracy[trialCount] = 0;
         }
         else
-        {
+        {            
             resultsAccuracy[trialCount] = 1;
         }
         DateTime timeNow = DateTime.Now;
@@ -269,6 +278,10 @@ public class TargetInteraction : MonoBehaviour
         foreach (int a in resultsAccuracy)
         {
             sumAccuracy += a;
+        }
+        if (sumAccuracy > 0)
+        {
+            sumAccuracy--;
         }
         summary += sumAccuracy.ToString()+"\nTime with Penalty: " + (sumTime / trialAmount + sumAccuracy*penalty).ToString();
         textMeshResult.text = summary;
