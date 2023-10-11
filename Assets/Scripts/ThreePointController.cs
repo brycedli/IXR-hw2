@@ -12,41 +12,56 @@ public class ThreePointController : MonoBehaviour
         Z,
         Confirm,
     }
-    public PointType pointType;
 
-    public GameObject centerPoint;
-    public GameObject xPoint;
-    public GameObject yPoint;
-    public GameObject zPoint;
+    public GameObject taskManager;
+    public GameObject pointer;
 
-    public GameObject centerPointTarget;
-    public GameObject xPointTarget;
-    public GameObject yPointTarget;
-    public GameObject zPointTarget;
+    private PointType pointType;
 
     public GameObject pointMarkerPrefab;
     public GameObject targetPointMarkerPrefab;
-    //public GameObject cubeMarkerPrefab;
+    
+    private GameObject centerPoint;
+    private GameObject xPoint;
+    private GameObject yPoint;
+    private GameObject zPoint;
+
+    private GameObject centerPointTarget;
+    private GameObject xPointTarget;
+    private GameObject yPointTarget;
+    private GameObject zPointTarget;
+
     [SerializeField] private OVRInput.Button selectButton = OVRInput.Button.PrimaryIndexTrigger;
     [SerializeField] private OVRInput.Button backButton = OVRInput.Button.PrimaryHandTrigger;
     [SerializeField] private OVRInput.Button buttonA = OVRInput.Button.One;
 
-    public GameObject taskManager;
+    private float targetScaleLarge = 0.05f;
+    private float targetScaleSmall = 0.01f;
+
+    private float selectorScale = 0.01f;
+
+    private Color halfWhite = new Color(1, 1, 1, 0.1f);
+    private Color halfRed = new Color(1, 0, 0, 0.1f);
+    private Color halfGreen = new Color(0, 1, 0, 0.1f);
+    private Color halfBlue = new Color(0, 0, 1, 0.1f);
+
+    private Color fullWhite = new Color(1, 1, 1, 0.6f);
+    private Color fullRed = new Color(1, 0, 0, 0.6f);
+    private Color fullGreen = new Color(0, 1, 0, 0.6f);
+    private Color fullBlue = new Color(0, 0, 1, 0.6f);
 
     void Start()
     {
         Debug.Assert(pointMarkerPrefab != null);
         Debug.Assert(targetPointMarkerPrefab != null);
-        StartTrial();
+        Debug.Assert(pointer != null);
         centerPointTarget = Instantiate(targetPointMarkerPrefab);
         xPointTarget = Instantiate(targetPointMarkerPrefab);
         yPointTarget = Instantiate(targetPointMarkerPrefab);
         zPointTarget = Instantiate(targetPointMarkerPrefab);
+        StartTrial();
 
-        centerPointTarget.GetComponent<Renderer>().material.color = Color.white;
-        xPointTarget.GetComponent<Renderer>().material.color = Color.red;
-        yPointTarget.GetComponent<Renderer>().material.color = Color.green;
-        zPointTarget.GetComponent<Renderer>().material.color = Color.blue;
+
     }
 
     void StartTrial ()
@@ -67,6 +82,18 @@ public class ThreePointController : MonoBehaviour
         {
             Destroy(zPoint);
         }
+
+        centerPointTarget.GetComponent<Renderer>().material.color = fullWhite;
+        xPointTarget.GetComponent<Renderer>().material.color = halfRed;
+        yPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+        zPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+
+
+        centerPointTarget.transform.localScale = Vector3.one * targetScaleLarge;
+        xPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+        yPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+        zPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+
         pointType = PointType.Center;
         
     }
@@ -105,26 +132,64 @@ public class ThreePointController : MonoBehaviour
                 if (pointType == PointType.Center)
                 {
                     centerPoint = GameObject.Instantiate(pointMarkerPrefab);
-                    centerPoint.GetComponent<Renderer>().material.color = Color.white;
-                    centerPoint.transform.position = transform.position;
+                    centerPoint.GetComponent<Renderer>().material.color = fullWhite;
+                    centerPoint.transform.position = pointer.transform.position;
+                    centerPoint.transform.localScale = Vector3.one * selectorScale;
+                    
+                    centerPointTarget.GetComponent<Renderer>().material.color = halfWhite;
+                    xPointTarget.GetComponent<Renderer>().material.color = fullRed;
+                    yPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+                    zPointTarget.GetComponent<Renderer>().material.color = halfBlue;
+
+                    centerPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    xPointTarget.transform.localScale = Vector3.one * targetScaleLarge;
                 }
                 if (pointType == PointType.X)
                 {
                     xPoint = GameObject.Instantiate(pointMarkerPrefab);
-                    xPoint.GetComponent<Renderer>().material.color = Color.red;
-                    xPoint.transform.position = transform.position;
+                    xPoint.GetComponent<Renderer>().material.color = fullRed;
+                    xPoint.transform.position = pointer.transform.position;
+                    xPoint.transform.localScale = Vector3.one * selectorScale;
+
+                    centerPointTarget.GetComponent<Renderer>().material.color = halfWhite;
+                    xPointTarget.GetComponent<Renderer>().material.color = halfRed;
+                    yPointTarget.GetComponent<Renderer>().material.color = fullGreen;
+                    zPointTarget.GetComponent<Renderer>().material.color = halfBlue;
+
+                    xPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    yPointTarget.transform.localScale = Vector3.one * targetScaleLarge;
                 }
                 if (pointType == PointType.Y)
                 {
                     yPoint = GameObject.Instantiate(pointMarkerPrefab);
-                    yPoint.GetComponent<Renderer>().material.color = Color.green;
-                    yPoint.transform.position = transform.position;
+                    yPoint.GetComponent<Renderer>().material.color = fullGreen;
+                    yPoint.transform.position = pointer.transform.position;
+                    yPoint.transform.localScale = Vector3.one * selectorScale;
+
+                    centerPointTarget.GetComponent<Renderer>().material.color = halfWhite;
+                    xPointTarget.GetComponent<Renderer>().material.color = halfRed;
+                    yPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+                    zPointTarget.GetComponent<Renderer>().material.color = fullBlue;
+
+                    yPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    zPointTarget.transform.localScale = Vector3.one * targetScaleLarge;
                 }
                 if (pointType == PointType.Z)
                 {
                     zPoint = GameObject.Instantiate(pointMarkerPrefab);
-                    zPoint.GetComponent<Renderer>().material.color = Color.blue;
-                    zPoint.transform.position = transform.position;
+                    zPoint.transform.position = pointer.transform.position;
+                    zPoint.transform.localScale *= 0.5f;
+                    zPoint.transform.localScale = Vector3.one * selectorScale;
+
+                    centerPointTarget.GetComponent<Renderer>().material.color = halfWhite;
+                    xPointTarget.GetComponent<Renderer>().material.color = halfRed;
+                    yPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+                    zPointTarget.GetComponent<Renderer>().material.color = halfGreen;
+
+                    centerPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    xPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    yPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
+                    zPointTarget.transform.localScale = Vector3.one * targetScaleSmall;
 
                     // last point: visualize cube
                     GameObject source = taskManager.GetComponent<TargetInteraction>().sourceGameObject;

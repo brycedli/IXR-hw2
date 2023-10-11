@@ -124,6 +124,96 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1002761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 59233892}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 26b436f9e5ee645599ca901711d45865,
+        type: 3}
+      propertyPath: m_Name
+      value: Cone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 26b436f9e5ee645599ca901711d45865, type: 3}
+--- !u!4 &1002762 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 26b436f9e5ee645599ca901711d45865,
+    type: 3}
+  m_PrefabInstance: {fileID: 1002761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &24776416
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +694,12 @@ Transform:
   m_Father: {fileID: 537728712}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &329442329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2080101472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &346664029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,12 +1388,6 @@ Transform:
   m_Father: {fileID: 1636793007}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &668213414 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 2080101472}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &767362627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1565,7 @@ MonoBehaviour:
   targetGameObject: {fileID: 1638698060}
   sourceGameObject: {fileID: 1263488610}
   wall: {fileID: 1778180108}
-  player: {fileID: 668213414}
+  player: {fileID: 329442329}
   trialCount: 0
   manipulationType: 0
   manipulationDimension: 0
@@ -1582,6 +1672,37 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2080101472}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &874520172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874520173}
+  m_Layer: 0
+  m_Name: Cone tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &874520173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874520172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.991, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1002762}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212005077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,15 +2731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbb7c77f1aae4c0e9bae3060c67ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointType: 0
-  centerPoint: {fileID: 0}
-  xPoint: {fileID: 0}
-  yPoint: {fileID: 0}
-  zPoint: {fileID: 0}
-  centerPointTarget: {fileID: 0}
-  xPointTarget: {fileID: 0}
-  yPointTarget: {fileID: 0}
-  zPointTarget: {fileID: 0}
+  taskManager: {fileID: 815433604}
+  pointer: {fileID: 874520172}
   pointMarkerPrefab: {fileID: 3828104760697190708, guid: e679019f04a3d464a8053e33de2a71a7,
     type: 3}
   targetPointMarkerPrefab: {fileID: 3828104760697190708, guid: e679019f04a3d464a8053e33de2a71a7,
@@ -2626,7 +2740,6 @@ MonoBehaviour:
   selectButton: 8192
   backButton: 16384
   buttonA: 1
-  taskManager: {fileID: 815433604}
 --- !u!1 &1959711294
 GameObject:
   m_ObjectHideFlags: 0
