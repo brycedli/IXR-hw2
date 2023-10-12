@@ -171,7 +171,7 @@ public class TargetInteraction : MonoBehaviour
         targetGameObject.transform.position = GetRandomPosition();
         targetGameObject.transform.localScale = new Vector3(GetRandomScale(), GetRandomScale(), GetRandomScale());
         targetGameObject.transform.rotation = Quaternion.Euler(new Vector3(GetRandomRotation(), GetRandomRotation(), GetRandomRotation()));
-        Vector3 cameraPosition = targetGameObject.transform.position - Camera.main.transform.forward * 0.5f;
+        Vector3 cameraPosition = targetGameObject.transform.position - Camera.main.transform.forward * 0.3f;
         cameraPosition.y = targetGameObject.transform.position.y;
         player.transform.position = cameraPosition;
     }
@@ -183,6 +183,21 @@ public class TargetInteraction : MonoBehaviour
         sourceGameObject.transform.rotation = Quaternion.Euler(rotationSource);
     }
 
+    public bool isCorrect ()
+    {
+        float distance = (targetGameObject.transform.position - sourceGameObject.transform.position).magnitude;
+        float diffRotation = (targetGameObject.transform.rotation.eulerAngles - sourceGameObject.transform.rotation.eulerAngles).magnitude;
+        float diffScale = (targetGameObject.transform.localScale - sourceGameObject.transform.localScale).magnitude;
+        if (distance < thresholdDistance && diffRotation < thresholdRotation && diffScale < thresholdScale)
+        {
+            return true;
+            //targetGameObject.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void UpdateTarget()
     {
         float distance = (targetGameObject.transform.position - sourceGameObject.transform.position).magnitude;
@@ -190,15 +205,19 @@ public class TargetInteraction : MonoBehaviour
         float diffScale = (targetGameObject.transform.localScale - sourceGameObject.transform.localScale).magnitude;
         if (distance < thresholdDistance && diffRotation < thresholdRotation && diffScale < thresholdScale)
         {
-            targetGameObject.GetComponent<Renderer>().material.color = Color.green;
+            Color temp = Color.green;
+            temp.a = 0.2f;
+            targetGameObject.GetComponent<Renderer>().material.color = temp;
         }
         else
         {
             Color temp = Color.red;
-            temp.a = 0.5f;
+            temp.a = 0.0f;
             targetGameObject.GetComponent<Renderer>().material.color = temp;
         }    
     }
+
+    
 
     private void UpdateDebugLog()
     {
@@ -207,7 +226,11 @@ public class TargetInteraction : MonoBehaviour
         float diffScale = (targetGameObject.transform.localScale - sourceGameObject.transform.localScale).magnitude;
         if (debugLog.activeSelf == true)
         {
-            debugMesh.text = manipulationType.ToString() + "\n" + manipulationDimension.ToString();// + "\n distance: " + distance.ToString() + "\n rotation: " + targetGameObject.transform.rotation.eulerAngles.ToString() + "\n" + sourceGameObject.transform.rotation.eulerAngles.ToString() + "\n scale: " + diffScale.ToString();
+            DateTime timeNow = DateTime.Now;
+            TimeSpan timeDifference = timeNow - timeStart;
+           
+            debugMesh.text = "Trial " + trialCount + " out of " + trialAmount + " \n Time: " + timeDifference.TotalSeconds.ToString("F2"); 
+            //debugMesh.text = manipulationType.ToString() + "\n" + manipulationDimension.ToString();// + "\n distance: " + distance.ToString() + "\n rotation: " + targetGameObject.transform.rotation.eulerAngles.ToString() + "\n" + sourceGameObject.transform.rotation.eulerAngles.ToString() + "\n scale: " + diffScale.ToString();
         }
     }
 
